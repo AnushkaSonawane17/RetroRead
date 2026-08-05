@@ -1,158 +1,15 @@
-// // import React from 'react';
-
-// // const ExchangePage = () => {
-// //   return (
-// //     <div className="space-y-6">
-// //       <h1 className="text-3xl font-bold">🔄 Book Exchange</h1>
-// //       <p className="text-[#636E72]">Exchange physical books with nearby readers</p>
-// //     </div>
-// //   );
-// // };
-
-// // export default ExchangePage;
-
-// import React, { useState } from 'react';
-// import { Link } from 'react-router-dom';
-
-// const ExchangePage = () => {
-//   const [activeTab, setActiveTab] = useState('available');
-//   const [location, setLocation] = useState('New York');
-
-//   const exchangeBooks = [
-//     { id: 1, title: "Atomic Habits", author: "James Clear", owner: "Sarah Wilson", location: "New York", distance: "2.3 km", cover: "https://images-na.ssl-images-amazon.com/images/I/81wgcld4wxL.jpg", status: "available", rating: 4.9 },
-//     { id: 2, title: "Ikigai", author: "Héctor García", owner: "Mike Johnson", location: "Los Angeles", distance: "5.1 km", cover: "https://images-na.ssl-images-amazon.com/images/I/81l3rZK4HFL.jpg", status: "available", rating: 4.7 },
-//     { id: 3, title: "Deep Work", author: "Cal Newport", owner: "Emily Davis", location: "Chicago", distance: "3.7 km", cover: "https://images-na.ssl-images-amazon.com/images/I/81bGXaJ9PLL.jpg", status: "pending", rating: 4.6 },
-//     { id: 4, title: "Sapiens", author: "Yuval N. Harari", owner: "David Brown", location: "San Francisco", distance: "1.8 km", cover: "https://images-na.ssl-images-amazon.com/images/I/713jIoMO3UL.jpg", status: "available", rating: 4.8 },
-//     { id: 5, title: "The Psychology of Money", author: "Morgan Housel", owner: "Amanda Lee", location: "Austin", distance: "4.2 km", cover: "https://images-na.ssl-images-amazon.com/images/I/71TR5M0nVdL.jpg", status: "completed", rating: 4.9 },
-//     { id: 6, title: "Meditations", author: "Marcus Aurelius", owner: "James Chen", location: "Seattle", distance: "2.9 km", cover: "https://images-na.ssl-images-amazon.com/images/I/81bWgY6WQ4L.jpg", status: "available", rating: 4.5 },
-//     { id: 7, title: "The Alchemist", author: "Paulo Coelho", owner: "Rachel Green", location: "New York", distance: "1.2 km", cover: "https://images-na.ssl-images-amazon.com/images/I/71aFt4J5fKL.jpg", status: "available", rating: 4.8 },
-//     { id: 8, title: "The Power of Now", author: "Eckhart Tolle", owner: "Lisa Park", location: "Los Angeles", distance: "3.5 km", cover: "https://images-na.ssl-images-amazon.com/images/I/71WtKt7fVqL.jpg", status: "pending", rating: 4.6 },
-//   ];
-
-//   const filteredBooks = exchangeBooks.filter(book => book.status === activeTab);
-
-//   const getStatusColor = (status) => {
-//     switch(status) {
-//       case 'available': return 'from-emerald-600 to-emerald-400';
-//       case 'pending': return 'from-amber-600 to-amber-400';
-//       case 'completed': return 'from-blue-600 to-blue-400';
-//       default: return 'from-gray-600 to-gray-400';
-//     }
-//   };
-
-//   const getStatusIcon = (status) => {
-//     switch(status) {
-//       case 'available': return '🟢';
-//       case 'pending': return '🟡';
-//       case 'completed': return '🔵';
-//       default: return '⚪';
-//     }
-//   };
-
-//   return (
-//     <div className="min-h-screen bg-gradient-to-b from-[#1a0f0a] via-[#2d1a0e] to-[#1a0f0a] py-8">
-//       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-//         {/* ===== Header ===== */}
-//         <div className="bg-[#2d1a0e]/60 backdrop-blur-sm rounded-2xl p-6 border border-[#D4A017]/10 shadow-2xl mb-6">
-//           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-//             <div>
-//               <h1 className="text-3xl font-bold text-[#D4A017]">🔄 Book Exchange</h1>
-//               <p className="text-[#D4A017]/50 text-sm mt-1">Exchange physical books with nearby readers</p>
-//             </div>
-//             <div className="flex items-center gap-3">
-//               <span className="text-sm text-[#D4A017]/50">📍 {location}</span>
-//               <button className="px-4 py-2 bg-[#1a0f0a]/80 rounded-full text-sm text-[#D4A017] border border-[#D4A017]/20 hover:border-[#D4A017]/50 transition">
-//                 Change
-//               </button>
-//               <button className="px-6 py-2.5 bg-gradient-to-r from-[#D4A017] to-[#8B6914] text-[#1a0f0a] rounded-full text-sm font-semibold shadow-lg shadow-[#D4A017]/20 hover:shadow-[#D4A017]/40 transition">
-//                 + List Book
-//               </button>
-//             </div>
-//           </div>
-//         </div>
-
-//         {/* ===== Tabs ===== */}
-//         <div className="flex gap-2 mb-6 overflow-x-auto">
-//           {['available', 'pending', 'completed'].map((tab) => (
-//             <button
-//               key={tab}
-//               className={`px-6 py-2.5 rounded-full text-sm font-medium transition ${
-//                 activeTab === tab
-//                   ? 'bg-gradient-to-r from-[#D4A017] to-[#8B6914] text-[#1a0f0a] shadow-lg shadow-[#D4A017]/20'
-//                   : 'bg-[#1a0f0a]/60 text-[#D4A017]/60 hover:text-[#D4A017] border border-[#D4A017]/10'
-//               }`}
-//               onClick={() => setActiveTab(tab)}
-//             >
-//               {getStatusIcon(tab)} {tab.charAt(0).toUpperCase() + tab.slice(1)}
-//               <span className={`ml-2 px-2 py-0.5 rounded-full text-xs ${
-//                 activeTab === tab ? 'bg-[#1a0f0a]/20 text-[#1a0f0a]' : 'bg-[#D4A017]/10 text-[#D4A017]'
-//               }`}>
-//                 {exchangeBooks.filter(b => b.status === tab).length}
-//               </span>
-//             </button>
-//           ))}
-//         </div>
-
-//         {/* ===== Exchange Grid ===== */}
-//         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-//           {filteredBooks.map((book) => (
-//             <div key={book.id} className="bg-[#2d1a0e]/60 backdrop-blur-sm rounded-2xl overflow-hidden border border-[#D4A017]/10 hover:border-[#D4A017]/30 shadow-lg hover:shadow-2xl transition group">
-//               <div className="flex p-4 gap-4">
-//                 <div className="w-24 h-32 flex-shrink-0 rounded-lg overflow-hidden shadow-lg">
-//                   <img src={book.cover} alt={book.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
-//                 </div>
-//                 <div className="flex-1 min-w-0">
-//                   <h3 className="font-semibold text-[#f5ede4] group-hover:text-[#D4A017] transition truncate">{book.title}</h3>
-//                   <p className="text-sm text-[#D4A017]/50 truncate">{book.author}</p>
-//                   <p className="text-xs text-[#D4A017]/30 mt-1">👤 {book.owner}</p>
-//                   <p className="text-xs text-[#D4A017]/30">📍 {book.location} • {book.distance}</p>
-//                   <p className="text-xs text-[#D4A017]">★ {book.rating}</p>
-//                   <div className="flex items-center gap-2 mt-3">
-//                     <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium text-white bg-gradient-to-r ${getStatusColor(book.status)}`}>
-//                       {book.status.charAt(0).toUpperCase() + book.status.slice(1)}
-//                     </span>
-//                     {book.status === 'available' && (
-//                       <button className="px-3 py-1 bg-gradient-to-r from-[#D4A017] to-[#8B6914] text-[#1a0f0a] rounded-full text-xs font-semibold hover:shadow-lg hover:shadow-[#D4A017]/20 transition ml-auto">
-//                         Request Exchange
-//                       </button>
-//                     )}
-//                     {book.status === 'pending' && (
-//                       <span className="text-xs text-[#D4A017]/40 ml-auto">⏳ Awaiting response</span>
-//                     )}
-//                     {book.status === 'completed' && (
-//                       <span className="text-xs text-emerald-400 ml-auto">✅ Completed</span>
-//                     )}
-//                   </div>
-//                 </div>
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-
-//         {/* ===== Empty State ===== */}
-//         {filteredBooks.length === 0 && (
-//           <div className="bg-[#2d1a0e]/60 backdrop-blur-sm rounded-2xl p-12 text-center border border-[#D4A017]/10">
-//             <div className="text-5xl mb-4">📭</div>
-//             <h3 className="text-xl font-semibold text-[#f5ede4]">No {activeTab} exchanges</h3>
-//             <p className="text-[#D4A017]/50 text-sm mt-2">Check back later or list your own books for exchange</p>
-//           </div>
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default ExchangePage;
-
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { RefreshCw, MapPin, User, Star, Clock, CheckCircle2, Plus } from 'lucide-react';
 
 /**
- * ExchangePage — same forest / brass token system as the RetroRead home page.
- * Covers are served from Open Library's cover API keyed by ISBN-13
- * (covers.openlibrary.org/b/isbn/{isbn}-L.jpg) — stable and no auth needed.
+ * ExchangePage — same warm-paper / ink-navy / coral / brass system as the
+ * rest of the app. Covers via Open Library's cover API keyed by ISBN-13
+ * (covers.openlibrary.org/b/isbn/{isbn}-L.jpg) — stable, no auth needed.
+ *
+ * Motion is tied to the concept of exchange: a slowly turning swap icon in
+ * the header, cards that rise in as if being placed on a table, a status
+ * badge that pulses only while genuinely "pending," and a map pin that
+ * hops when you change city.
  */
 
 const exchangeBooks = [
@@ -169,53 +26,123 @@ const exchangeBooks = [
 const coverUrl = (isbn) => `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg`;
 
 const statusStyle = {
-  available: "from-[#7E9B76] to-[#5C7A54]",
-  pending: "from-[#C9A567] to-[#A98849]",
-  completed: "from-[#6E8DA6] to-[#4E6E84]",
+  available: { badge: "bg-[#6B8F55]", text: "text-[#6B8F55]", tint: "bg-[#6B8F55]/10 border-[#6B8F55]/30" },
+  pending: { badge: "bg-[#A9812F]", text: "text-[#A9812F]", tint: "bg-[#A9812F]/10 border-[#A9812F]/30" },
+  completed: { badge: "bg-[#3E7C74]", text: "text-[#3E7C74]", tint: "bg-[#3E7C74]/10 border-[#3E7C74]/30" },
 };
+
+const cities = ["Mumbai", "Delhi", "Bengaluru", "Pune", "Hyderabad", "Chennai", "Kolkata", "Ahmedabad"];
 
 const ExchangePage = () => {
   const [activeTab, setActiveTab] = useState('available');
   const [city, setCity] = useState('Mumbai');
+  const [pinBounce, setPinBounce] = useState(0);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
 
   const filteredBooks = exchangeBooks.filter((book) => book.status === activeTab);
+  const counts = {
+    available: exchangeBooks.filter((b) => b.status === 'available').length,
+    pending: exchangeBooks.filter((b) => b.status === 'pending').length,
+    completed: exchangeBooks.filter((b) => b.status === 'completed').length,
+  };
+
+  const handleCityChange = (e) => {
+    setCity(e.target.value);
+    setPinBounce((n) => n + 1); // retrigger the bounce animation via key change
+  };
 
   return (
-    <div className="min-h-screen w-full bg-[#141C16] text-[#EFE7D8] py-10">
+    <div className="min-h-screen w-full bg-[#F6EFE3] text-[#1E2A42] py-10">
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&display=swap');
         .font-display { font-family: 'Fraunces', serif; }
-        .font-body { font-family: 'Inter', sans-serif; }
+        .font-body { font-family: 'Work Sans', sans-serif; }
+
+        .paper-grain {
+          background-image: radial-gradient(rgba(30,42,66,0.035) 1px, transparent 1px);
+          background-size: 4px 4px;
+        }
+
+        @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .spin-slow { animation: spin-slow 6s linear infinite; }
+
+        @keyframes card-rise {
+          0% { opacity: 0; transform: translateY(16px) scale(0.98); }
+          100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .card-rise { animation: card-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards; opacity: 0; }
+
+        @keyframes pulse-soft {
+          0%, 100% { box-shadow: 0 0 0 0 rgba(169,129,47,0.35); }
+          50% { box-shadow: 0 0 0 6px rgba(169,129,47,0); }
+        }
+        .pulse-soft { animation: pulse-soft 2s ease-in-out infinite; }
+
+        @keyframes tick-in {
+          0% { transform: scale(0.5); opacity: 0; }
+          60% { transform: scale(1.15); opacity: 1; }
+          100% { transform: scale(1); }
+        }
+        .tick-in { animation: tick-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+
+        @keyframes pin-hop {
+          0% { transform: translateY(0); }
+          30% { transform: translateY(-6px); }
+          55% { transform: translateY(0); }
+          75% { transform: translateY(-3px); }
+          100% { transform: translateY(0); }
+        }
+        .pin-hop { animation: pin-hop 0.5s ease-out; }
+
+        .seal-btn { position: relative; overflow: hidden; }
+        @keyframes shimmer-sweep {
+          0% { transform: translateX(-120%) skewX(-15deg); }
+          100% { transform: translateX(220%) skewX(-15deg); }
+        }
+        .seal-btn::after {
+          content: ""; position: absolute; top: 0; left: 0; width: 40%; height: 100%;
+          background: linear-gradient(120deg, transparent, rgba(255,255,255,0.5), transparent);
+          transform: translateX(-120%) skewX(-15deg);
+        }
+        .seal-btn:hover::after { animation: shimmer-sweep 0.8s ease forwards; }
       `}</style>
 
-      <div className="font-body max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      <div className="pointer-events-none fixed inset-0 z-0 paper-grain opacity-60" />
+
+      <div className="font-body relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
 
         {/* ===== Header ===== */}
-        <div className="bg-[#1A2320]/70 backdrop-blur-sm rounded-2xl p-6 border border-[#2E3A30] shadow-xl">
+        <div
+          className={`bg-[#FFFBF3] rounded-2xl p-6 border border-[#E2D5BC] shadow-[0_8px_20px_-14px_rgba(30,42,66,0.3)] transition-all duration-700 ${
+            mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+          }`}
+        >
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#C9A567]/10 border border-[#C9A567]/30">
-                <RefreshCw size={18} className="text-[#C9A567]" />
+              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#D8472F]/10 border border-[#D8472F]/30">
+                <RefreshCw size={18} className="text-[#D8472F] spin-slow" />
               </div>
               <div>
-                <h1 className="font-display font-bold text-3xl text-[#EFE7D8]">Book Exchange</h1>
-                <p className="text-[#7E8F80] text-sm mt-1">Swap physical books with readers near you</p>
+                <h1 className="font-display font-bold text-3xl text-[#1E2A42]">Book Exchange</h1>
+                <p className="text-[#8A7F6B] text-sm mt-1">Swap physical books with readers near you</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <span className="flex items-center gap-1.5 text-sm text-[#B9C9AE]">
-                <MapPin size={14} className="text-[#C9A567]" /> {city}
+              <span className="flex items-center gap-1.5 text-sm text-[#5B6478]">
+                <MapPin key={pinBounce} size={14} className="text-[#D8472F] pin-hop" /> {city}
               </span>
               <select
                 value={city}
-                onChange={(e) => setCity(e.target.value)}
-                className="px-3 py-2 bg-[#141C16]/80 rounded-full text-sm text-[#EFE7D8] border border-[#2E3A30] focus:outline-none focus:ring-2 focus:ring-[#C9A567]/60"
+                onChange={handleCityChange}
+                className="px-3 py-2 bg-[#F6EFE3] rounded-full text-sm text-[#1E2A42] border border-[#E2D5BC] focus:outline-none focus:ring-2 focus:ring-[#D8472F]/40"
               >
-                {["Mumbai", "Delhi", "Bengaluru", "Pune", "Hyderabad", "Chennai", "Kolkata", "Ahmedabad"].map((c) => (
-                  <option key={c} value={c} className="bg-[#141C16]">{c}</option>
+                {cities.map((c) => (
+                  <option key={c} value={c}>{c}</option>
                 ))}
               </select>
-              <button className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-[#C9A567] to-[#A98849] text-[#141C16] rounded-full text-sm font-semibold shadow-lg shadow-black/30 hover:scale-[1.03] transition">
+              <button className="seal-btn flex items-center gap-2 px-6 py-2.5 bg-[#D8472F] text-[#FFFBF3] rounded-full text-sm font-semibold shadow-[0_8px_18px_-8px_rgba(216,71,47,0.55)] hover:bg-[#B23522] transition">
                 <Plus size={15} /> List Book
               </button>
             </div>
@@ -224,77 +151,96 @@ const ExchangePage = () => {
 
         {/* ===== Tabs ===== */}
         <div className="flex gap-2 overflow-x-auto">
-          {['available', 'pending', 'completed'].map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-medium transition ${
-                activeTab === tab
-                  ? 'bg-gradient-to-r from-[#C9A567] to-[#A98849] text-[#141C16] shadow-lg shadow-black/20'
-                  : 'bg-[#1A2320]/70 text-[#7E8F80] hover:text-[#EFE7D8] border border-[#2E3A30]'
-              }`}
-            >
-              {tab.charAt(0).toUpperCase() + tab.slice(1)}
-              <span className={`px-2 py-0.5 rounded-full text-xs ${
-                activeTab === tab ? 'bg-[#141C16]/20 text-[#141C16]' : 'bg-[#2E3A30] text-[#B9C9AE]'
-              }`}>
-                {exchangeBooks.filter((b) => b.status === tab).length}
-              </span>
-            </button>
-          ))}
+          {['available', 'pending', 'completed'].map((tab) => {
+            const isActive = activeTab === tab;
+            return (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                  isActive
+                    ? 'bg-[#D8472F] text-[#FFFBF3] shadow-[0_8px_18px_-8px_rgba(216,71,47,0.5)] scale-[1.03]'
+                    : 'bg-[#FFFBF3] text-[#8A7F6B] hover:text-[#1E2A42] border border-[#E2D5BC]'
+                }`}
+              >
+                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                <span
+                  className={`px-2 py-0.5 rounded-full text-xs transition-colors ${
+                    isActive ? 'bg-[#FFFBF3]/25 text-[#FFFBF3]' : 'bg-[#EDE2CE] text-[#8A7F6B]'
+                  }`}
+                >
+                  {counts[tab]}
+                </span>
+              </button>
+            );
+          })}
         </div>
 
         {/* ===== Exchange Grid ===== */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {filteredBooks.map((book) => (
-            <div key={book.id} className="bg-[#1A2320]/70 backdrop-blur-sm rounded-2xl overflow-hidden border border-[#2E3A30] hover:border-[#C9A567]/40 shadow-lg hover:shadow-black/40 transition group">
-              <div className="flex p-4 gap-4">
-                <div className="w-20 h-28 flex-shrink-0 rounded-lg overflow-hidden shadow-lg bg-[#0F1512]">
-                  <img src={coverUrl(book.isbn)} alt={book.title} className="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-sm text-[#EFE7D8] group-hover:text-[#C9A567] transition truncate">{book.title}</h3>
-                  <p className="text-xs text-[#B9C9AE] truncate">{book.author}</p>
-                  <p className="flex items-center gap-1 text-[11px] text-[#7E8F80] mt-1.5">
-                    <User size={11} /> {book.owner}
-                  </p>
-                  <p className="flex items-center gap-1 text-[11px] text-[#7E8F80]">
-                    <MapPin size={11} /> {book.city} · {book.distance}
-                  </p>
-                  <p className="flex items-center gap-1 text-[11px] text-[#C9A567] mt-0.5">
-                    <Star size={10} className="fill-[#C9A567] text-[#C9A567]" /> {book.rating}
-                  </p>
-                  <div className="flex items-center gap-2 mt-3">
-                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium text-[#141C16] bg-gradient-to-r ${statusStyle[book.status]}`}>
-                      {book.status.charAt(0).toUpperCase() + book.status.slice(1)}
-                    </span>
-                    {book.status === 'available' && (
-                      <button className="ml-auto px-3 py-1 bg-gradient-to-r from-[#C9A567] to-[#A98849] text-[#141C16] rounded-full text-xs font-semibold hover:shadow-lg hover:shadow-black/20 transition">
-                        Request
-                      </button>
-                    )}
-                    {book.status === 'pending' && (
-                      <span className="ml-auto flex items-center gap-1 text-xs text-[#7E8F80]">
-                        <Clock size={12} /> Awaiting
+          {filteredBooks.map((book, i) => {
+            const s = statusStyle[book.status];
+            return (
+              <div
+                key={`${activeTab}-${book.id}`}
+                className="card-rise bg-[#FFFBF3] rounded-2xl overflow-hidden border border-[#E2D5BC] hover:border-[#D9C7A3] hover:-translate-y-1 hover:shadow-[0_16px_28px_-16px_rgba(30,42,66,0.35)] shadow-[0_8px_18px_-14px_rgba(30,42,66,0.25)] transition-all duration-300 group"
+                style={{ animationDelay: `${i * 80}ms` }}
+              >
+                <div className="flex p-4 gap-4">
+                  <div className="w-20 h-28 flex-shrink-0 rounded-lg overflow-hidden shadow-md bg-[#EDE2CE]">
+                    <img
+                      src={coverUrl(book.isbn)}
+                      alt={book.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-semibold text-sm text-[#1E2A42] group-hover:text-[#D8472F] transition truncate">{book.title}</h3>
+                    <p className="text-xs text-[#5B6478] truncate">{book.author}</p>
+                    <p className="flex items-center gap-1 text-[11px] text-[#8A7F6B] mt-1.5">
+                      <User size={11} /> {book.owner}
+                    </p>
+                    <p className="flex items-center gap-1 text-[11px] text-[#8A7F6B]">
+                      <MapPin size={11} /> {book.city} · {book.distance}
+                    </p>
+                    <p className="flex items-center gap-1 text-[11px] text-[#A9812F] mt-0.5">
+                      <Star size={10} className="fill-[#A9812F] text-[#A9812F]" /> {book.rating}
+                    </p>
+                    <div className="flex items-center gap-2 mt-3">
+                      <span className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-medium border ${s.tint} ${s.text}`}>
+                        <span className={`h-1.5 w-1.5 rounded-full ${s.badge} ${book.status === 'pending' ? 'pulse-soft' : ''}`} />
+                        {book.status.charAt(0).toUpperCase() + book.status.slice(1)}
                       </span>
-                    )}
-                    {book.status === 'completed' && (
-                      <span className="ml-auto flex items-center gap-1 text-xs text-[#7E9B76]">
-                        <CheckCircle2 size={12} /> Done
-                      </span>
-                    )}
+                      {book.status === 'available' && (
+                        <button className="seal-btn ml-auto px-3 py-1 bg-[#D8472F] text-[#FFFBF3] rounded-full text-xs font-semibold hover:bg-[#B23522] transition">
+                          Request
+                        </button>
+                      )}
+                      {book.status === 'pending' && (
+                        <span className="ml-auto flex items-center gap-1 text-xs text-[#A9812F]">
+                          <Clock size={12} className="pulse-soft rounded-full" /> Awaiting
+                        </span>
+                      )}
+                      {book.status === 'completed' && (
+                        <span className="ml-auto flex items-center gap-1 text-xs text-[#3E7C74]">
+                          <CheckCircle2 size={12} className="tick-in" /> Done
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* ===== Empty State ===== */}
         {filteredBooks.length === 0 && (
-          <div className="bg-[#1A2320]/70 backdrop-blur-sm rounded-2xl p-12 text-center border border-[#2E3A30]">
-            <h3 className="font-display text-xl font-semibold text-[#EFE7D8]">No {activeTab} exchanges</h3>
-            <p className="text-[#7E8F80] text-sm mt-2">Check back later, or list your own books for exchange</p>
+          <div className="bg-[#FFFBF3] rounded-2xl p-12 text-center border border-[#E2D5BC]">
+            <RefreshCw size={26} className="mx-auto text-[#D8472F] mb-3 spin-slow" />
+            <h3 className="font-display text-xl font-semibold text-[#1E2A42]">No {activeTab} exchanges</h3>
+            <p className="text-[#8A7F6B] text-sm mt-2">Check back later, or list your own books for exchange</p>
           </div>
         )}
       </div>
