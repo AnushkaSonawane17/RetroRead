@@ -16,6 +16,8 @@ import MarketplacePage from './Components/Pages/MarketplacePage';
 import ExchangePage from './Components/Pages/ExchangePage';
 import CommunityPage from './Components/Pages/CommunityPage';
 import ProfilePage from './Components/Pages/ProfilePage';
+import SearchPage from './Components/Pages/SearchPage';
+import BookDetailsPage from './Components/Pages/BookDetailsPage';
 
 // Gamification Pages
 import GamificationPage from './Components/Pages/GamificationPage';
@@ -26,6 +28,7 @@ import GuessPage from './Components/Pages/GuessPage';
 import StreakPage from './Components/Pages/StreakPage';
 import ScratchPage from './Components/Pages/ScratchPage';
 import ProgressPage from './Components/Pages/ProgressPage';
+
 
 function App() {
   return (
@@ -45,6 +48,8 @@ function App() {
           <Route path="/exchange" element={<ExchangePage />} />
           <Route path="/community" element={<CommunityPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/book/:bookId" element={<BookDetailsPage />} />
           
           {/* ===== GAMIFICATION ROUTES ===== */}
           <Route path="/gamification" element={<GamificationPage />} />
