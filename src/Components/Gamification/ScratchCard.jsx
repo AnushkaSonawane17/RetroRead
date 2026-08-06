@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 
 const ScratchCard = ({ 
   prize = "20 KOINS", 
@@ -7,10 +7,7 @@ const ScratchCard = ({
   cardNumber = 1 
 }) => {
   const [revealed, setRevealed] = useState(isRevealed);
-  const [isScratching, setIsScratching] = useState(false);
   const [progress, setProgress] = useState(0);
-  const canvasRef = useRef(null);
-  const containerRef = useRef(null);
 
   const prizes = [
     { emoji: '⭐', amount: '20 KOINS', color: 'from-[#D4A017] to-[#FFD700]' },
@@ -38,7 +35,6 @@ const ScratchCard = ({
       </div>
 
       <div 
-        ref={containerRef}
         className="relative w-full h-48 rounded-xl overflow-hidden cursor-pointer bg-gradient-to-br from-[#1a0f0a] to-[#2d1a0e] border-2 border-[#D4A017]/20"
         onClick={handleScratch}
       >
@@ -79,4 +75,5 @@ const ScratchCard = ({
   );
 };
 
+// ✅ THIS MUST BE AT THE END
 export default ScratchCard;

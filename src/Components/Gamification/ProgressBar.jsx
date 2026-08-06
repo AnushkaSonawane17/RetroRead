@@ -40,14 +40,11 @@ const ProgressBar = ({
             style={{ width: `${percentage}%` }}
           />
         </div>
-        
-        {/* Percentage Label */}
         <div className="absolute -top-6 right-0 text-sm font-bold text-[#D4A017]">
           {Math.round(percentage)}%
         </div>
       </div>
 
-      {/* Milestones */}
       <div className="flex justify-between mt-3 text-xs text-[#D4A017]/30">
         <span>🌱 Start</span>
         <span>📖 25%</span>
@@ -76,4 +73,5 @@ const ProgressBar = ({
   );
 };
 
-export default ProgressBar;  // ← ONLY ONE DEFAULT EXPORT
+// ✅ THIS MUST BE AT THE END
+export default ProgressBar;
